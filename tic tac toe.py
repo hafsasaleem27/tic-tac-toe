@@ -1,3 +1,21 @@
+# add Tkinter module
+import tkinter as tk
+
+# 1. Create the main window
+root = tk.Tk()
+
+# 2. Set window properties
+root.title("Tic Tac Toe Game")
+root.geometry("300x200")
+
+# 3. Add widgets
+label = tk.Label(root, text="Welcome!")
+
+# 4. Arrange widgets
+label.pack(pady = 10)
+
+# 5. Enter the main event loop
+root.mainloop()
 
 size = input("Print the size of board: ")
 board = []
