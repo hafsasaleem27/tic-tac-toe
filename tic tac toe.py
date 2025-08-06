@@ -32,9 +32,18 @@ def map_coordinates(marker):
     row = input("Enter row coordinates: ")
     col = input("Enter col coordinates: ")
 
-    if board[int(row) - 1][int(col) - 1] == " ":
-        board[int(row) - 1][int(col) - 1] = marker
-        print_board(int(size))
+    # validate inputs
+    if row.isdigit() and col.isdigit():
+        if int(row) - 1 in range(0, int(size) - 1) and int(col) - 1 in range(0, int(size) - 1):
+            if board[int(row) - 1][int(col) - 1] == " ":
+                board[int(row) - 1][int(col) - 1] = marker
+                print_board(int(size))
+        else:
+            print("Enter valid coordinates")
+            return []
+    else:
+        print("Enter valid coordinates")
+        return []
 
     return [row, col]
 
@@ -129,14 +138,16 @@ def play_game():
             marker = "O"
             player_1 = True
         position = map_coordinates(marker)
-        if check_win(position) == True:
-            is_playing = False
-        else:
-            is_draw = check_draw(False)
-            if is_draw == True:
-                print("Game draw")
+        if len(position) != 0:
+            if check_win(position) == True:
                 is_playing = False
+            else:
+                is_draw = check_draw(False)
+                if is_draw == True:
+                    print("Game draw")
+                    is_playing = False
 
+# start game
 def start_game():
     if int(size) >= 3:
         create_board(int(size))
